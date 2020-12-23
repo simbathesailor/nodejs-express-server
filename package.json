@@ -1,0 +1,21 @@
+{
+  "name": "node-express-from-generator",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start":"nodemon -e ts --exec yarn run run:dev",
+    "run:dev": "tsc && node ./bin/www"
+  },
+  "dependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express": "^4.17.9",
+    "@types/morgan": "^1.9.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.17.1",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.6",
+    "typescript": "^4.1.3"
+  }
+}
