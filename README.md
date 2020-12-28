@@ -29,5 +29,10 @@ https://github.com/AllThingsSmitty/css-protips#use-unset-instead-of-resetting-al
 
 
 
+## Streaming article: 
+
+https://medium.com/better-programming/video-stream-with-node-js-and-html5-320b3191a6b6
+
+https://nodejs.dev/learn/introduction-to-nodejs
 
 https://medium.com/progress-on-ios-development/connecting-an-ec2-instance-with-a-godaddy-domain-e74ff190c233
