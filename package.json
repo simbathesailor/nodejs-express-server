@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start":"nodemon -e ts --exec yarn run run:dev",
+    "start":"nodemon -e ts,mp4 --exec yarn run run:dev",
     "run:dev": "tsc && node ./bin/www"
   },
   "dependencies": {

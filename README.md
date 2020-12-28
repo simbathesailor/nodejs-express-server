@@ -26,3 +26,8 @@ https://github.com/goldbergyoni/nodebestpractices
 ## CSS
 
 https://github.com/AllThingsSmitty/css-protips#use-unset-instead-of-resetting-all-properties
+
+
+
+
+https://medium.com/progress-on-ios-development/connecting-an-ec2-instance-with-a-godaddy-domain-e74ff190c233
