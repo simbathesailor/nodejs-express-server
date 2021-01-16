@@ -36,3 +36,11 @@ https://medium.com/better-programming/video-stream-with-node-js-and-html5-320b31
 https://nodejs.dev/learn/introduction-to-nodejs
 
 https://medium.com/progress-on-ios-development/connecting-an-ec2-instance-with-a-godaddy-domain-e74ff190c233
+
+
+
+## Caching: 
+
+http://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching#cache_validation
