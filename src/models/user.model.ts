@@ -14,12 +14,13 @@ import sequelize from "../db"
 class user_table extends Model {}
 
 user_table.init({
-  id: {
-    type: DataTypes.UUID,
+  user_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
     unique: true,
+    defaultValue: 0,
   },
   name: {
     type: DataTypes.STRING,
@@ -35,6 +36,12 @@ user_table.init({
   },
   salary: {
     type: DataTypes.REAL
+  },
+  createdAt: {
+    type: DataTypes.DATE
+  },
+  updatedAt: {
+    type: DataTypes.DATE
   }
 }, {
   sequelize,
