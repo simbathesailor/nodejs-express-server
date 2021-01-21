@@ -1,6 +1,7 @@
 import express from "express"
 import sequelize from "../db";
 import pool from "../db"
+import { v4 as uuidv4 } from 'uuid';
 import user_table from "../models/user.model"
 var router = express.Router();
 
@@ -19,14 +20,14 @@ router.post("/adduser", async function(req, res, next) {
     console.log("🚀 ~ file: users.ts ~ line 14 ~ router.post ~ req", req.body)
     const transaction = await sequelize.transaction()
     
+    // have to validate the payload here
 
+    const newId = uuidv4()
+    console.log("🚀 ~ file: users.ts ~ line 26 ~ router.post ~ newId", newId)
     try {
       const obj = {
-        "name": "Anil",
-      "age": 29,
-      "address":"my address",
-      "salary": 21000,
-      user_id: 1
+     ...( req.body ? (req.body) : {}) ,
+      user_id: newId
     }
 
     // sequelize.query("SELECT max(cust_no) + 1 as 'custNo' from employees.customers", {
@@ -50,6 +51,17 @@ router.post("/adduser", async function(req, res, next) {
        }) 
   
        await transaction.commit()
+       const items = await sequelize.query(`select * from public.user_table where email='anil@dot.com';`, {
+        model:user_table ,
+        mapToModel: true // pass true here if you have any mapped fields
+      });
+       console.log("🚀 ~ file: users.ts ~ line 63 ~ router.post ~ items", items)
+       res.send({
+         success: "ok",
+         data: {...obj}
+       })
+
+      
     } catch(e) {
       console.log("Err is: ", e);
       transaction.rollback();

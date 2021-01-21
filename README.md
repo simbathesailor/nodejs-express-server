@@ -44,3 +44,16 @@ https://medium.com/progress-on-ios-development/connecting-an-ec2-instance-with-a
 http://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
 
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching#cache_validation
+
+
+
+## Sql queries
+
+
+select * from public.user_table;
+
+
+CREATE EXTENSION "uuid-ossp";
+
+ALTER TABLE public.user_table
+ALTER COLUMN user_id SET DATA TYPE uuid USING (uuid_generate_v4());

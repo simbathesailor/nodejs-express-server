@@ -33,7 +33,7 @@ import usersRouter from "./routes/users"
 //     console.error('Unable to connect to the database:', error);
 //   }
 // }
-
+sequelize.sync()
 
 var app = express();
 

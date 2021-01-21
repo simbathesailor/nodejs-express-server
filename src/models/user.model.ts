@@ -15,12 +15,11 @@ class user_table extends Model {}
 
 user_table.init({
   user_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true,
-    unique: true,
-    defaultValue: 0,
+    // unique: true,
+    // defaultValue: 0,
   },
   name: {
     type: DataTypes.STRING,
@@ -42,6 +41,12 @@ user_table.init({
   },
   updatedAt: {
     type: DataTypes.DATE
+  },
+  email: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
+    primaryKey: true,
   }
 }, {
   sequelize,
