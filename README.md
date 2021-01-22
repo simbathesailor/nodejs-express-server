@@ -57,3 +57,8 @@ CREATE EXTENSION "uuid-ossp";
 
 ALTER TABLE public.user_table
 ALTER COLUMN user_id SET DATA TYPE uuid USING (uuid_generate_v4());
+
+
+
+https://stackify.com/node-js-debugging-tips/
+

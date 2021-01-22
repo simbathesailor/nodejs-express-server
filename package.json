@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon -e ts,mp4 --exec yarn run run:dev",
-    "run:dev": "tsc && node ./bin/www"
+    "start": "nodemon -e ts,mp4   --exec yarn run run:dev",
+    "run:dev": "tsc && node --inspect ./bin/www"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.2",

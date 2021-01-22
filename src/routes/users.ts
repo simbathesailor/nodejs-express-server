@@ -83,4 +83,98 @@ router.post("/adduser", async function(req, res, next) {
   }
 })
 
+router.get("/get",async function(req, res, next) {
+  try {
+
+    // const transaction = await sequelize.transaction()
+
+    const items = await sequelize.query(`select * from public.user_table;`, {
+      model:user_table ,
+      mapToModel: true // pass true here if you have any mapped fields
+    });
+
+    // console.log("====>", user_table.rawAttributes)
+     res.status(200).send({
+      success: true,
+      message: "Success message",
+      payload: {
+        data: {
+          items: items
+        }
+      }
+    })
+  } catch(e) {
+    return res.status(500).send({
+      success: false,
+      message: "Something went wrong !"
+    })
+  }
+    console.log("🚀 ~ file: users.ts ~ line 112 ~ router.get ~ user_table.rawAttributes", user_table.rawAttributes)
+    console.log("🚀 ~ file: users.ts ~ line 112 ~ router.get ~ user_table.rawAttributes", user_table.rawAttributes)
+})
+
+router.patch("/updateuser",async function(req, res, next) {
+  try {
+    const {payload} = req.body
+    const keysInTable = Object.keys(user_table.rawAttributes)
+    const { user_id } = payload
+    if(!user_id) {
+      return res.status(400).send({
+        success: false,
+        message: "user_id is required",
+      })
+    }
+
+    let user = await  user_table.findOne({
+      where : {"user_id": user_id}
+    })
+    console.log("🚀 ~ file: users.ts ~ line 131 ~ router.patch ~ user", user)
+
+    debugger
+    // if user is there anf payload is valid
+    if(user && payload) {
+      Object.keys(payload).forEach((key) => {
+        let newObject: any = {}
+        
+        if(keysInTable.indexOf(key) !== -1 && key !== "user_id" && key !== "email") {
+          newObject[key] = payload[key]
+        }
+        
+        if(Object.keys(newObject).length > 0) {
+          console.log("🚀 ~ file: users.ts ~ line 141 ~ Object.keys ~ newObject", newObject)
+          // still after all those check , some items are there which you want to update.
+
+          // user_table.update({
+            
+          // })
+
+          return res.status(200).send({
+            success: true,
+            message: "test success message"
+          })
+          
+        }
+      })
+    }
+    //  res.status(200).send({
+    //   success: true,
+    //   message: "Success message",
+    //   payload: {
+    //     data: {
+    //       items: []
+    //     }
+    //   }
+    // })
+  } catch(e) {
+    debugger
+    console.log("🚀 ~ file: users.ts ~ line 167 ~ router.patch ~ e", e)
+    return res.status(500).send({
+      success: false,
+      message: "Something went wrong !"
+    })
+  }
+})
+
+
+
 export default router
