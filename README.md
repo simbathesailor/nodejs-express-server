@@ -62,3 +62,11 @@ ALTER COLUMN user_id SET DATA TYPE uuid USING (uuid_generate_v4());
 
 https://stackify.com/node-js-debugging-tips/
 
+
+https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+
+
+
+https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/security/escape-output.md
+
+

@@ -46,12 +46,17 @@ user_table.init({
     type: DataTypes.STRING,
     unique: true,
     allowNull: false,
-    primaryKey: true,
   }
 }, {
   sequelize,
   modelName: "user_table",
-  freezeTableName: true
+  freezeTableName: true,
+  indexes:[
+    {
+      unique: true,
+      fields: ["email"]
+    }
+  ]
 })
 
 

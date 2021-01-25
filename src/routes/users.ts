@@ -7,10 +7,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
-  
- 
-  res.send('respond with a resource');
+res.send('respond with a resource');
 });
 
 
@@ -26,27 +23,12 @@ router.post("/adduser", async function(req, res, next) {
     console.log("🚀 ~ file: users.ts ~ line 26 ~ router.post ~ newId", newId)
     try {
       const obj = {
-     ...( req.body ? (req.body) : {}) ,
-      user_id: newId
-    }
-
-    // sequelize.query("SELECT max(cust_no) + 1 as 'custNo' from employees.customers", {
-    //   type: sequelize.Sequelize.QueryTypes.SELECT
-    // })
-    // .then(results => {
-    //   return results[0];
-    // })
-    // .then(nextPk => {
-    //   const values = Object.assign({}, newCustomer, nextPk);
-    //   return customersModel.create(values);
-    // })
-    // .then(newRecord => {
-    //   console.log('newRecord:', newRecord);
-    // });
-   
+      ...( req.body ? (req.body) : {}) ,
+        user_id: newId
+      }
     // @ts-ignore
-    console.log("obj.id ===>", obj.id)
-      await  user_table.create(obj, {
+      console.log("obj.id ===>", obj.id)
+      const userAfterAddition = await  user_table.create(obj, {
         transaction
        }) 
   
@@ -65,20 +47,32 @@ router.post("/adduser", async function(req, res, next) {
     } catch(e) {
       console.log("Err is: ", e);
       transaction.rollback();
+      debugger
+      res.status(200).send({
+        success: false,
+        message: "Email already exists"
+      })
     }
-  //   await user_table.create({
-  //     "name": "Anil",
-  //     "age": 29,
-  //     "address":"my address",
-  //     "salary": 21000
-  // });
-    // console.log("🚀 ~ file: users.ts ~ line 16 ~ router.get ~ jane", jane)
-    // console.log(jane instanceof user_table);
-    // // await jane.save();
-    // console.log("saved to database", jane)
-    // res.json(jane)
   } catch(e) {
+    // []
+    // e.errors[0]
+
+    //     [ValidationErrorItem]
+    // 0: ValidationErrorItem
+    // instance: user_table {dataValues: {…}, _previousDataValues: {…}, _changed: Set(6), _options: {…}, isNewRecord: true}
+    // message: "email must be unique"
+    // origin: "DB"
+    // path: "email"
+    // type: "unique violation"
+    // validatorArgs: []
+    // validatorKey: "not_unique"
+    // validatorName: null
+    // value: "piya@dot.com"
     console.log("err", e)
+    res.status(500).send({
+      success: false,
+      message: "Something wrong happened"
+    })
 
   }
 })
@@ -133,7 +127,7 @@ router.patch("/updateuser",async function(req, res, next) {
     debugger
     // if user is there anf payload is valid
     if(user && payload) {
-      Object.keys(payload).forEach((key) => {
+      Object.keys(payload).forEach(async (key) => {
         let newObject: any = {}
         
         if(keysInTable.indexOf(key) !== -1 && key !== "user_id" && key !== "email") {
@@ -142,15 +136,23 @@ router.patch("/updateuser",async function(req, res, next) {
         
         if(Object.keys(newObject).length > 0) {
           console.log("🚀 ~ file: users.ts ~ line 141 ~ Object.keys ~ newObject", newObject)
-          // still after all those check , some items are there which you want to update.
 
+          // still after all those check , some items are there which you want to update.
+          Object.keys(newObject).forEach((keyInObj: string) => {
+            // @ts-ignore
+            user[keyInObj] = newObject[keyInObj]
+          })
           // user_table.update({
             
           // })
-
+          await user?.save()
           return res.status(200).send({
             success: true,
-            message: "test success message"
+            message: "test success message",
+            data: {
+              // @ts-ignore
+              ...(user?.dataValues || {})
+            }
           })
           
         }
