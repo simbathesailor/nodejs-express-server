@@ -70,3 +70,11 @@ https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_C
 https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/security/escape-output.md
 
 
+https://medium.com/better-programming/containerize-node-react-postgres-with-docker-on-aws-ca548595f01e
+
+
+https://www.youtube.com/watch?v=1PBcSzTbbjw
+
+
+
+
